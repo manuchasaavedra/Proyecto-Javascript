@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Shadows+Into+Light+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova&family=Montserrat:wght@500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #d2b099e7
+}
+.colorHeader {
+    background-color: #a67452b5;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.galeria {
+    width: 100%;
+}
+
+.carousel-item {
+    height: 50vh; }
+
+
+img{
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-img-top {
+    height: 40vh;
+}
+
+.boton-menu {
+    background-color: transparent;
+    border: 0;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: black;
+    display: flex;
+    font-weight: 600;
+    padding: 1rem;
+    width: 100%;
+    position: relative;
+}
+
+#contenedor-productos{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 2rem; }
+
+
+    @media (max-width: 768px) {
+        #contenedor-productos {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      @media (max-width: 480px) {
+        #contenedor-productos {
+          grid-template-columns: 1fr;
+        }
+      }
+
+.producto-agregar {
+     border: 0;
+    background-color: rgba(73, 19, 19, 0.582);
+     padding: .4rem;
+     font-size: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    border: 2px solid rgba(73, 19, 19, 0.582);
+    color: rgba(0, 0, 0, 0.756);
+}
+
+.producto-agregar:hover {
+    background-color: #a67352e7;
+    color: black;
+}
+
+/*Carrito*/
+
+.cart-header {
+    background-color: rgb(70, 20, 20)
+}
+
+.headerCarrito {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    color: #a67352e7;
+}
+
+.cart-container {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #a67452b5;
+    transition: right 0.3s ease-in-out;
+    overflow-y: auto;
+  }
+  
+  .cart-items {
+    padding: 5px;
+  }
+  
+  .show {
+    right: 0;
+  }
+
+.bgc-card {
+    background-color: #a67352e7;
+}
+
+.centrar {
+    text-align: center;
+}

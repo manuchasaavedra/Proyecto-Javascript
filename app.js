@@ -1,113 +1,33 @@
-// PRODUCTOS
-
-const productos = [
-    {
-        id: "picada-criolla",
-        titulo: "Picada Criolla ",
-        imagen: "./img/1.jpg",
-        categoria: {
-            nombre: "Picadas",
-            id: "picadas"
-        },
-        precio: 15000
-    },
-  
-    {
-        id: "picada-de-mar",
-        titulo: "Picada de Mar ",
-        imagen: "./img/2.jpg",
-        categoria: {
-            nombre: "Picadas",
-            id: "picadas"
-        },
-        precio: 20000
-    },
-  
-    {
-        id: "pan-casero",
-        titulo: "Pan Casero",
-        imagen: "./img/pan y picada.jpg",
-        categoria: {
-            nombre: "Panes",
-            id: "panes"
-        },
-        precio: 300
-    },
-  
-    {
-        id: "plato-cordero",
-        titulo: "Plato de Cordero",
-        imagen: "./img/Comida Principalpexels-chevanon-photography-323682.jpg",
-        categoria: {
-            nombre: "Principales",
-            id: "principales"
-        },
-        precio: 5000
-    },
-  
-    {
-        id: "picada-vegetariana",
-        titulo: "Picada Vegetariana ",
-        imagen: "./img/queso y picada.jpg",
-        categoria: {
-            nombre: "Picadas",
-            id: "picadas"
-        },
-        precio: 10000
-    },
-  
-  
-    {
-        id: "sushi",
-        titulo: "Sushi x15",
-        imagen: "./img/sushin cook.jpg",
-        categoria: {
-            nombre: "Sushi",
-            id: "sushi"
-        },
-        precio: 8000
-    },
-  
-    {
-        id: "sable-fr",
-        titulo: "Sable de Frutos Rojos",
-        imagen: "./img/9.jpg",
-        categoria: {
-            nombre: "Tortas",
-            id: "tortas"
-        },
-        precio: 7800
-    },
-  
-    {
-        id: "cremoso-maracuya",
-        titulo: "Cremoso de Maracuya",
-        imagen: "./img/7.jpg",
-        categoria: {
-            nombre: "Tortas",
-            id: "tortas"
-        },
-        precio: 8000
-    }
-  ]  
-  
   const contenedorProductos = document.querySelector("#contenedor-productos");
+  const URL_PRODUCTOS = "./productos.json";
+  let productos = [];
   
-  productos.forEach((producto, indice) => {
-   let content = document.createElement("div");
-   content.innerHTML = `
-     <div class="card" style="width: 18rem;">
-       <img src="${producto.imagen}" class="card-img-top producto-imagen" alt="${producto.titulo}">
-       <div class="card-body bgc-card">
-         <h5 class="card-title">${producto.titulo}</h5>
-         <p class="producto-precio">$${producto.precio}</p>
-         <button class="producto-agregar" id="${producto.id}" onClick="agregarAlCarrito(${indice})">Agregar</button>
-       </div>
-     </div>
-   `;
-   contenedorProductos.appendChild(content);
-  });
+  const cargarProductos = async () => {
+    try {
+      const response = await fetch(URL_PRODUCTOS);
+      productos = await response.json();
   
+      productos.forEach((producto, indice) => {
+        let content = document.createElement("div");
+        content.innerHTML = `
+          <div class="card" style="width: 18rem;">
+            <img src="${producto.imagen}" class="card-img-top producto-imagen" alt="${producto.titulo}">
+            <div class="card-body bgc-card">
+              <h5 class="card-title">${producto.titulo}</h5>
+              <p class="producto-precio">$${producto.precio}</p>
+              <button class="producto-agregar" id="${producto.id}" onClick="agregarAlCarrito(${indice})">Agregar</button>
+            </div>
+          </div>
+        `;
+        contenedorProductos.appendChild(content);
+      });
+    } catch (error) {
+      console.error("Error al cargar los productos:", error);
+    }
+  };
+  
+  cargarProductos();
+
   // Array Carrito Vacio
   let carrito = [];
   
@@ -128,6 +48,19 @@ const productos = [
   
      guardarCarritoEnLocalStorage();
      mostrarCarrito();
+
+     Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Producto agregado al carrito',
+      showConfirmButton: false,
+      timer: 1500,
+      toast: true, 
+      //Estilos
+      background: '#a67352e7',
+      iconColor: 'brown',
+      titleColor: '#000000',
+    });
    }
   };
   
@@ -206,12 +139,136 @@ const productos = [
   }
   
   const comprarButton = document.querySelector("#comprarButton");
-  comprarButton.addEventListener("click", comprar);
+  comprarButton.addEventListener("click", mostrarFormulario);
+
+
+  const simularPagoAPI = async () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const exito = Math.random() < 0.7;
   
-  function comprar() {
-   //Falta armar la función compra
+        if (exito) {
+          resolve();
+        } else {
+          reject("Error en el pago");
+        }
+      }, 2000);
+    });
+  };
+
+  function mostrarFormulario() {
+
+    if (carrito.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Tu carrito está vacío',
+        text: 'Agrega productos antes de realizar una compra',
+        showConfirmButton: false,
+        timer: 3000,
+        //Estilos
+        background: '#a67352e7',
+        iconColor: 'brown',
+        titleColor: '#000000',
+      }).then(() => {
+        // Redirigir al usuario a la sección de productos
+        window.location.href = '#contenedor-productos';
+      });
+      return;
+    }
+  
+    comprarButton.style.display = "none";
+    vaciarCarritoButton.style.display = "none";
+
+    const formulario = document.createElement("form");
+    formulario.innerHTML = `
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre y Apellido</label>
+        <input type="text" class="form-control" id="nombre" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="direccion" class="form-label">Dirección de envío</label>
+        <input type="text" class="form-control" id="direccion" required>
+      </div>
+      <button type="submit" class="btn producto-agregar">Enviar</button>
+    `;
+  
+    const contenedorFormulario = document.querySelector("#contenedor-carrito");
+    contenedorFormulario.innerHTML = "";
+    contenedorFormulario.appendChild(formulario);
+  
+    formulario.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const nombre = document.querySelector("#nombre").value;
+      const email = document.querySelector("#email").value;
+      const direccion = document.querySelector("#direccion").value;
+  
+      Swal.fire({
+        title: '¿Deseas confirmar la compra?',
+        showDenyButton: true,
+        confirmButtonText: 'Confirmar',
+        denyButtonText: `Cancelar`,
+        icon: 'question',
+        customClass: {
+          confirmButton: 'my-swal-confirm-button-class',
+          denyButton: 'my-swal-deny-button-class',
+          cancelButton: 'my-swal-cancel-button-class',
+        },
+        background: '#a67352e7',
+        iconColor: 'brown',
+        titleColor: '#000000',
+        buttonsStyling: false,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          simularPagoAPI()
+            .then(() => {
+              Swal.fire({
+                title: `Gracias ${nombre} por tu compra`,
+                text: `Dentro de las 72hs tu pedido será entregado en ${direccion}`,
+                icon: 'success',
+                //Estilos
+                background: '#a67352e7',
+                iconColor: 'brown',
+                titleColor: '#000000',
+              });
+              vaciarCarrito();
+              setTimeout(() => {
+                window.location.reload();
+              }, 3000);
+            })
+            .catch((error) => {
+              Swal.fire({
+                title: 'Error en el pago',
+                text: error,
+                icon: 'error',
+                //Estilos
+                background: '#a67352e7',
+                iconColor: 'brown',
+                titleColor: '#000000',
+              });
+            });
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: 'Compra cancelada',
+            icon: 'error',
+            //Estilos
+            customClass: {
+              confirmButton: 'my-swal-confirm-button-class',
+             },
+            background: '#a67352e7',
+            iconColor: 'brown',
+            titleColor: '#000000',
+            buttonsStyling: false,
+          });
+        }
+      });
+    });
   }
-  
+
+
   // LocalStorage
   const guardarCarritoEnLocalStorage = () => {
    localStorage.setItem("carrito", JSON.stringify(carrito));

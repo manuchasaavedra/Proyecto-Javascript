@@ -1,0 +1,91 @@
+[
+    {
+        "id": "picada-criolla",
+        "titulo": "Picada Criolla ",
+        "imagen": "./img/1.jpg",
+        "categoria": {
+            "nombre": "Picadas",
+            "id": "picadas"
+        },
+        "precio": 15000
+    },
+  
+    {
+        "id": "picada-de-mar",
+        "titulo": "Picada de Mar ",
+        "imagen": "./img/2.jpg",
+        "categoria": {
+            "nombre": "Picadas",
+            "id": "picadas"
+        },
+        "precio": 20000
+    },
+  
+    {
+        "id": "pan-casero",
+        "titulo": "Pan Casero",
+        "imagen": "./img/pan y picada.jpg",
+        "categoria": {
+            "nombre": "Panes",
+            "id": "panes"
+        },
+        "precio": 300
+    },
+  
+    {
+        "id": "plato-cordero",
+        "titulo": "Plato de Cordero",
+        "imagen": "./img/Comida Principalpexels-chevanon-photography-323682.jpg",
+        "categoria": {
+            "nombre": "Principales",
+            "id": "principales"
+        },
+        "precio": 5000
+    },
+  
+    {
+        "id": "picada-vegetariana",
+        "titulo": "Picada Vegetariana ",
+        "imagen": "./img/queso y picada.jpg",
+        "categoria": {
+            "nombre": "Picadas",
+            "id": "picadas"
+        },
+        "precio": 10000
+    },
+  
+  
+    {
+        "id": "sushi",
+        "titulo": "Sushi x15",
+        "imagen": "./img/sushin cook.jpg",
+        "categoria": {
+            "nombre": "Sushi",
+            "id": "sushi"
+        },
+        "precio": 8000
+    },
+  
+    {
+        "id": "sable-fr",
+        "titulo": "Sable de Frutos Rojos",
+        "imagen": "./img/9.jpg",
+        "categoria": {
+            "nombre": "Tortas",
+            "id": "tortas"
+        },
+       "precio": 7800
+    },
+  
+    {
+        "id": "cremoso-maracuya",
+        "titulo": "Cremoso de Maracuya",
+        "imagen": "./img/7.jpg",
+        "categoria": {
+            "nombre": "Tortas",
+            "id": "tortas"
+        },
+        "precio": 8000
+    }
+  ]  
+  

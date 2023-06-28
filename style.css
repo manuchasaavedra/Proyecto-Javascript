@@ -89,16 +89,11 @@ img{
 }
 
 /*Carrito*/
-
-.cart-header {
-    background-color: rgb(70, 20, 20)
-}
-
 .headerCarrito {
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
     font-size: 2rem;
-    color: #a67352e7;
+    color: rgb(70, 20, 20);
 }
 
 .cart-container {
@@ -127,3 +122,30 @@ img{
 .centrar {
     text-align: center;
 }
+
+
+/*ESTILOS DE SWAL*/
+  
+  .my-swal-confirm-button-class {
+    border: 0;
+    background-color: rgba(73, 19, 19, 0.582);
+     padding: .4rem;
+     font-size: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    border: 2px solid rgba(73, 19, 19, 0.582);
+    color: rgba(0, 0, 0, 0.756);
+  }
+  
+  .my-swal-deny-button-class {
+    border: 0;
+    background-color: rgba(73, 19, 19, 0.582);
+     padding: .4rem;
+     font-size: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    border: 2px solid rgba(73, 19, 19, 0.582);
+    color: rgba(0, 0, 0, 0.756);
+  }
+  
+
